@@ -7,10 +7,10 @@ import { getListByRange } from "../controllers/getListByRange.js";
 import { getListByYear } from "../controllers/getListByYear.js";
 const todoRouter = express.Router();
 
-todoRouter.get("/:date", getListByDate);
+todoRouter.get("/:numDay/:month/:year", getListByDate);
 todoRouter.get("/month/:month", getListByMonth);
 todoRouter.get("/year/:year", getListByYear);
-todoRouter.post("/", getListByRange);
+todoRouter.post("/range", getListByRange);
 todoRouter.get("/taskId/:taskId", deleteTask);
 todoRouter.get("/", getCountTask);
 
