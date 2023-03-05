@@ -1,10 +1,13 @@
-import express, { application } from "express";
+import dotenv from "dotenv";
+import express from "express";
 import todoRouter from "./Router/todoRouter.js";
 import homeRouter from "./Router/homeRouter.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import { data } from "./data.js";
 import taskModel from "./models/task.js";
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -22,11 +25,9 @@ app.use("/", homeRouter);
 
 mongoose.set("strictQuery", true);
 mongoose
-  .connect(
-    "mongodb+srv://ad2020:Adarsh100@cluster0.dqomhbh.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(3001, () => {
+    app.listen(process.env.PORT, () => {
       console.log("server is running on port 3001");
     });
     // taskModel.insertMany(data);
